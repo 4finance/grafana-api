@@ -13,7 +13,7 @@ allprojects {
     apply plugin: 'maven-publish'
 
     group 'io.fourfinanceit.metrics'
-    version '0.1'
+    version '0.1.1'
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }

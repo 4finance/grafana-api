@@ -1,9 +1,7 @@
 package io.fourfinanceit.metrics.grafana.builders;
 
 
-import io.fourfinanceit.metrics.grafana.api.Dashboard;
-import io.fourfinanceit.metrics.grafana.api.Row;
-import io.fourfinanceit.metrics.grafana.api.Time;
+import io.fourfinanceit.metrics.grafana.api.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,6 +33,7 @@ public class GrafanaDashboardBuilder {
         private String schemaVersion;
         private String version;
         private Set<String> links = new HashSet<>();
+        private List<Annotation> annotations = new ArrayList<>();
 
         public DashboardInCreation withId(Long id) {
             this.id = id;
@@ -115,6 +114,15 @@ public class GrafanaDashboardBuilder {
             return this;
         }
 
+        public AnnotationBuilder withAnnotation() {
+            return new AnnotationBuilder(this);
+        }
+
+        public DashboardInCreation addAnnotation(Annotation annotation) {
+            this.annotations.add(annotation);
+            return this;
+        }
+
         public Dashboard build() {
             Dashboard result = new Dashboard();
             result.setId(id);
@@ -132,6 +140,7 @@ public class GrafanaDashboardBuilder {
             result.setSchemaVersion(schemaVersion);
             result.setVersion(version);
             result.setLinks(links);
+            result.setAnnotations(new Annotations(this.annotations));
             return result;
         }
     }

@@ -19,6 +19,7 @@ public class Dashboard {
     private String schemaVersion;
     private String version;
     private Set<String> links;
+    private Annotations annotations;
 
     public Long getId() {
         return id;
@@ -138,5 +139,13 @@ public class Dashboard {
 
     public void setLinks(Set<String> links) {
         this.links = links;
+    }
+
+    public Annotations getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(Annotations annotations) {
+        this.annotations = annotations;
     }
 }
