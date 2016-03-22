@@ -1,0 +1,5 @@
+description = 'Plain java objects and builders for them'
+
+dependencies {
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.2'
+}

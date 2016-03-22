@@ -1,0 +1,3 @@
+rootProject.name = 'grafana-api'
+
+include 'grafana-api-pojos'
