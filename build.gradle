@@ -15,15 +15,11 @@ apply from: "${rootProject.buildDir}/release/gradle/version.gradle"
 
 allprojects {
     apply plugin: 'java'
-
     group = 'io.fourfinanceit.metrics'
     project.version = scmVersion.version
-
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }
-
-apply from: "${rootProject.buildDir}/release/gradle/release.gradle"
 
 subprojects {
     repositories {
@@ -33,13 +29,14 @@ subprojects {
     }
 
     apply plugin: 'groovy'
-    apply plugin: 'maven-publish'
     apply from: "${rootProject.buildDir}/release/gradle/publish.gradle"
 
     bintray {
         pkg { repo = 'general' }
     }
 }
+
+apply from: "${rootProject.buildDir}/release/gradle/release.gradle"
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.10'
