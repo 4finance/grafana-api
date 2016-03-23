@@ -4,19 +4,26 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:+"
+        classpath "com.ofg:micro-common-release:+"
+    }
+    dependencies {
+        ant.unjar src: configurations.classpath.find { it.name.startsWith("micro-common-release") }, dest: 'build/release'
     }
 }
 
+apply from: "${rootProject.buildDir}/release/gradle/version.gradle"
+
 allprojects {
     apply plugin: 'java'
-    apply plugin: 'maven-publish'
 
-    group 'io.fourfinanceit.metrics'
-    version '0.1.1'
+    group = 'io.fourfinanceit.metrics'
+    project.version = scmVersion.version
+
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }
+
+apply from: "${rootProject.buildDir}/release/gradle/release.gradle"
 
 subprojects {
     repositories {
@@ -25,7 +32,13 @@ subprojects {
         jcenter()
     }
 
-    apply from: "${rootProject.projectDir}/gradle/publish.gradle"
+    apply plugin: 'groovy'
+    apply plugin: 'maven-publish'
+    apply from: "${rootProject.buildDir}/release/gradle/publish.gradle"
+
+    bintray {
+        pkg { repo = 'general' }
+    }
 }
 
 task wrapper(type: Wrapper) {

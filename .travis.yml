@@ -1,0 +1,28 @@
+install:
+- true
+
+script:
+- set -e
+- ./gradlew check --info --stacktrace --continue -Pcoverage -Pcompatibility
+- source build/release/gradle/setGitVariables.sh
+- ./gradlew release -Prelease.disableRemoteCheck -Prelease.localOnly --info --stacktrace
+- ./gradlew finalizeRelease publishUploadedArtifacts -PbintrayUser=${BINTRAY_USER} -PbintrayKey=${BINTRAY_API_KEY} --info --stacktrace
+
+language: java
+
+jdk:
+- oraclejdk8
+
+matrix:
+  include:
+    # Release not skipped only in Java 7 build
+    - jdk: oraclejdk7
+      env: SKIP_RELEASE=false
+
+env:
+  global:
+  - TERM=dumb
+  - SKIP_RELEASE=true
+  - secure: <<encrypted GH_TOKEN>>
+  - secure: <<encrypted BINTRAY_USER>>
+  - secure: <<encrypted BINTRAY_API_KEY>>
