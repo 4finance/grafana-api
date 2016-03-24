@@ -12,11 +12,6 @@ language: java
 
 jdk:
 - oraclejdk8
-
-matrix:
-  include:
-  - jdk: oraclejdk7
-    env: SKIP_RELEASE=false
     
 env:
   global:
