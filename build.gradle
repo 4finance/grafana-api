@@ -14,6 +14,13 @@ buildscript {
 
 apply from: "${rootProject.buildDir}/release/gradle/version.gradle"
 
+scmVersion {
+    tag {
+        prefix = 'release'
+        versionSeparator = '/'
+    }
+}
+
 allprojects {
     apply plugin: 'java'
     group = 'io.fourfinanceit.metrics'
