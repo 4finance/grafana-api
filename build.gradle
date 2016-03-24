@@ -5,6 +5,7 @@ buildscript {
     }
     dependencies {
         classpath "com.ofg:micro-common-release:+"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5"
     }
     dependencies {
         ant.unjar src: configurations.classpath.find { it.name.startsWith("micro-common-release") }, dest: 'build/release'
