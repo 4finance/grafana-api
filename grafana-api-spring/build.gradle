@@ -1,0 +1,8 @@
+description = 'Grafana dashboard publishing with Spring'
+
+dependencies {
+    compile project(':grafana-api-pojos')
+    compile 'org.springframework:spring-web:4.2.6.RELEASE'
+    compile 'org.springframework.boot:spring-boot-autoconfigure:1.3.4.RELEASE'
+    compile 'org.slf4j:slf4j-api:1.7.21'
+}
